@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Inter is loaded via next/font — these ensure consistent baseline rendering */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Prevent iOS auto-zoom on input focus (requires min 16px font size) */
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+    /* Use dynamic viewport height on mobile — avoids issues with browser chrome */
+    min-height: 100dvh;
+  }
+
+  /* Visible keyboard focus ring — accessibility requirement */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-indigo-500;
+  }
+
+  /* Smooth scrolling only when the user hasn't asked for reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer utilities {
+  /* Chat scroll area — enables momentum scrolling on iOS */
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+}
